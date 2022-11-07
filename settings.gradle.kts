@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Dogcat"
-include ':app'
+include(":app")
