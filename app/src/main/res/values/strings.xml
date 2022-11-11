@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Dogcat</string>
+    <string name="app_name" translation_description="부가설명란">Dogcat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="today_dogcat_tab_title" translation_description="/">오늘의 dogcat</string>
+    <string name="dogcat_collection_tab_title" translation_description="/">도감</string>
+    <string name="dogcat_details_title" translation_description="/">Dogcat Details</string>
+
 </resources>
