@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_today_dogcat"
+    app:startDestination="@id/today_view_pager_fragment">
+
+    <fragment
+        android:id="@+id/today_view_pager_fragment"
+        android:name="com.godminq.dogcat.TodayViewPagerFragment"
+        tools:layout="@layout/fragment_today_view_pager">
+
+        <action
+            android:id="@+id/action_today_view_pager_fragment_to_today_dog_tab_fragment"
+            app:destination="@id/today_dog_tab_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="todayDogcat1"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/today_dog_tab_fragment"
+        android:name="com.godminq.dogcat.TodayDogTabFragment"
+        android:label="@string/today_dogcat_details_title"
+        tools:layout="@layout/fragment_today_dog_tab">
+
+        <action
+            android:id="@+id/action_today_dogcat_fragment_to_today_cat_tab_fragment"
+            app:destination="@id/today_cat_tab_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="todayDogcat2"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/today_cat_tab_fragment"
+        android:name="com.godminq.dogcat.TodayCatTabFragment"
+        android:label="@string/today_dogcat_details_title"
+        tools:layout="@layout/fragment_today_cat_tab">
+        <argument
+            android:name="todayDogcat3"
+            app:argType="string" />
+    </fragment>
+
+
+
+
+
+</navigation>

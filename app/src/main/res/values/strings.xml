@@ -5,6 +5,12 @@
 
     <string name="today_dogcat_tab_title" translation_description="/">오늘의 dogcat</string>
     <string name="dogcat_collection_tab_title" translation_description="/">도감</string>
+
+    <string name="today_dogcat_dog_tab_title" translation_description="/">Dog</string>
+    <string name="today_dogcat_cat_tab_title" translation_description="/">Cat</string>
+
+
     <string name="dogcat_details_title" translation_description="/">Dogcat Details</string>
+    <string name="today_dogcat_details_title" translation_description="/">Today Dogcat Details</string>
 
 </resources>

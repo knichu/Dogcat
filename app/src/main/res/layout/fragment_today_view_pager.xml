@@ -3,53 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--
-     Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in HomeViewPagerFragment, they are
-     both required to preserve the toolbar scroll / collapse state when navigating to a new screen and then coming back.
-    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/app_name"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/main_view_pager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/main_view_pager"
+            android:id="@+id/today_view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toTopOf="@+id/main_tabs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/today_tabs" />
 
         <!-- Override tabIconTint attribute of style with selector -->
         <!-- @drawable/tab_icon_color_selector 부분 수정 필요 -->
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/main_tabs"
+            android:id="@+id/today_tabs"
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:tabIconTint="@drawable/tab_icon_color_selector"
             app:tabTextColor="?attr/colorPrimaryDark" />
 

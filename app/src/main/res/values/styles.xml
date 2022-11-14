@@ -12,8 +12,6 @@
         <item name="colorSecondary">@color/sunflower_yellow_500</item>
         <item name="android:colorBackground">@color/sunflower_green_500</item>
 
-        <item name="textBlack">@color/black</item>
-
     </style>
 
     <style name="Theme.dogcat" parent="Base.Theme.dogcat"/>
