@@ -2,6 +2,10 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- 뒤로가기 구현위해 추가해봤던 코드
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context = "com.godminq.dogcat.MainActivity">
+    -->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_dogcat"

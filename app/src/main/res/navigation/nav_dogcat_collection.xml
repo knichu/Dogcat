@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_dogcat_collection"
+    app:startDestination="@id/selectCollectionFragment">
+
+    <fragment
+        android:id="@+id/selectCollectionFragment"
+        android:name="com.godminq.dogcat.SelectCollectionFragment"
+        android:label="SelectCollectionFragment"
+        tools:layout="@layout/fragment_select_collection">
+        <action
+            android:id="@+id/action_selectCollectionFragment_to_dogCollectionFragment"
+            app:destination="@id/dogCollectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@layout/fragment_select_collection"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_selectCollectionFragment_to_catCollectionFragment"
+            app:destination="@id/catCollectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@layout/fragment_select_collection"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dogCollectionFragment"
+        android:name="com.godminq.dogcat.DogCollectionFragment"
+        android:label="DogCollectionFragment"
+        tools:layout="@layout/fragment_dog_collection">
+    </fragment>
+    <fragment
+        android:id="@+id/catCollectionFragment"
+        android:name="com.godminq.dogcat.CatCollectionFragment"
+        android:label="CatCollectionFragment"
+        tools:layout="@layout/fragment_cat_collection">
+    </fragment>
+</navigation>
