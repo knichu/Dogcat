@@ -36,7 +36,6 @@
             app:argType="string" />
     </fragment>
 
-
     <fragment
         android:id="@+id/dogcat_collection_fragment"
         android:name="com.godminq.dogcat.DogcatCollectionFragment"
