@@ -3,26 +3,55 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- 뒤로가기 구현위해 추가해봤던 코드
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context = "com.godminq.dogcat.MainActivity">
-    -->
 
-    <!--
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/home_activity"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_dogcat" />
-    -->
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/app_name"
+            android:textColor="#000000"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/nav_host_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Override tabIconTint attribute of style with selector -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="60dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_dogcat"
+            tools:layout="@layout/fragment_today_dogcat" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            style="@style/Widget.MaterialComponents.TabLayout.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@drawable/menu_selector_color"
+            app:itemTextColor="@drawable/menu_selector_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_host_container"
+            app:menu="@menu/bottom_menu"/>
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mainViewPagerFragmentContainerView"
-        android:name="com.godminq.dogcat.MainViewPagerFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_main_view_pager" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
