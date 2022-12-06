@@ -7,9 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.godminq.dogcat.adapters.*
 import com.godminq.dogcat.databinding.FragmentMainViewPagerBinding
 import com.godminq.dogcat.databinding.FragmentTodayViewPagerBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +24,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainViewPagerFragment : Fragment() {
 
     val binding by lazy { FragmentMainViewPagerBinding.inflate(layoutInflater) }
+    private val navController by lazy {
+        (parentFragmentManager.findFragmentById(R.id.main_view_pager) as? NavHostFragment)?.navController
+    }
+
+
     private lateinit var callback: OnBackPressedCallback
 
     override fun onCreateView(
@@ -25,34 +37,28 @@ class MainViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 //        val binding = FragmentMainViewPagerBinding.inflate(inflater, container, false)
-        val tabLayout = binding.mainTabs
+        val bottomNavigation = binding.bottomNavigation
         val viewPager = binding.mainViewPager
-
-        viewPager.adapter = DogcatPagerAdapter(this)
 
         // 뷰페이저 스와이프 기능 제거
         binding.mainViewPager.run {
             isUserInputEnabled= false
         }
+        // 바텀 네비게이션 설정
+        with(binding.bottomNavigation) {
+            if (navController != null) setupWithNavController(navController!!)
+        }
 
-        // Set the icon and text for each tab
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.setIcon(getTabIcon(position))
-            tab.text = getTabTitle(position)
-        }.attach()
-
-
-//        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+//        // Set the icon and text for each tab
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            tab.setIcon(getTabIcon(position))
+//            tab.text = getTabTitle(position)
+//        }.attach()
 
         return binding.root
 
 
     }
-
-
-
-
-
 
     private fun getTabIcon(position: Int): Int {
         return when (position) {

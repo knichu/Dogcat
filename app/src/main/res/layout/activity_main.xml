@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- 뒤로가기 구현위해 추가해봤던 코드
     xmlns:tools="http://schemas.android.com/tools"
     tools:context = "com.godminq.dogcat.MainActivity">
     -->
 
+    <!--
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_dogcat"
+        android:id="@+id/home_activity"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_dogcat" />
+    -->
 
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainViewPagerFragmentContainerView"
+        android:name="com.godminq.dogcat.MainViewPagerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_main_view_pager" />
 </layout>

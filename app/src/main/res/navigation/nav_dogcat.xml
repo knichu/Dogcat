@@ -2,48 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/main_view_pager_fragment">
+    app:startDestination="@navigation/nav_today_dogcat">
 
-    <fragment
-        android:id="@+id/main_view_pager_fragment"
-        android:name="com.godminq.dogcat.MainViewPagerFragment"
-        tools:layout="@layout/fragment_main_view_pager">
+    <include app:graph="@navigation/nav_today_dogcat" />
+    <include app:graph="@navigation/nav_dogcat_collection" />
+    <include app:graph="@navigation/nav_settings" />
 
-        <action
-                android:id="@+id/action_main_view_pager_fragment_to_today_dogcat_fragment"
-                app:destination="@id/today_dogcat_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/today_dogcat_fragment"
-        android:name="com.godminq.dogcat.TodayDogcatFragment"
-        android:label="@string/dogcat_details_title"
-        tools:layout="@layout/fragment_today_dogcat">
-
-        <action
-            android:id="@+id/action_today_dogcat_fragment_to_dogcat_collection_fragment"
-            app:destination="@id/dogcat_collection_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="dogcatId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/dogcat_collection_fragment"
-        android:name="com.godminq.dogcat.DogcatCollectionFragment"
-        android:label="@string/dogcat_details_title"
-        tools:layout="@layout/fragment_dogcat_collection">
-        <argument
-            android:name="dogcatName"
-            app:argType="string" />
-    </fragment>
 
 </navigation>
