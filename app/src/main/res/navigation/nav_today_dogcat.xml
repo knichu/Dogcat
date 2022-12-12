@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/today_view_pager_fragment"
-        android:name="com.godminq.dogcat.TodayViewPagerFragment"
+        android:name="com.godminq.dogcat.ui.today.TodayViewPagerFragment"
         tools:layout="@layout/fragment_today_view_pager">
 
         <argument
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/today_dog_tab_fragment"
-        android:name="com.godminq.dogcat.TodayDogTabFragment"
+        android:name="com.godminq.dogcat.ui.today.TodayDogTabFragment"
         android:label="@string/today_dogcat_details_title"
         tools:layout="@layout/fragment_today_dog_tab">
 
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/today_cat_tab_fragment"
-        android:name="com.godminq.dogcat.TodayCatTabFragment"
+        android:name="com.godminq.dogcat.ui.today.TodayCatTabFragment"
         android:label="@string/today_dogcat_details_title"
         tools:layout="@layout/fragment_today_cat_tab">
         <argument

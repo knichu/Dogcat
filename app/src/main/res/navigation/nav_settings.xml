@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.godminq.dogcat.SettingsFragment"
+        android:name="com.godminq.dogcat.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings"
         android:label="SettingsFragment" />
 </navigation>

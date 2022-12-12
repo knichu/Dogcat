@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerViewTodayViewPagerFragment"
-        android:name="com.godminq.dogcat.TodayViewPagerFragment"
+        android:name="com.godminq.dogcat.ui.today.TodayViewPagerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_today_view_pager" />

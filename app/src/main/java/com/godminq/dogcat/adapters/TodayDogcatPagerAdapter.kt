@@ -2,11 +2,8 @@ package com.godminq.dogcat.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.godminq.dogcat.DogcatCollectionFragment
-import com.godminq.dogcat.TodayCatTabFragment
-import com.godminq.dogcat.TodayDogTabFragment
-import com.godminq.dogcat.TodayDogcatFragment
-
+import com.godminq.dogcat.ui.today.TodayCatTabFragment
+import com.godminq.dogcat.ui.today.TodayDogTabFragment
 
 const val TODAY_DOG_TAB_PAGE_INDEX = 0
 const val TODAY_CAT_TAB_PAGE_INDEX = 1

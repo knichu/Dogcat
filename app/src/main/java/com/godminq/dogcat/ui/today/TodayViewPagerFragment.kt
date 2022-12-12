@@ -1,10 +1,11 @@
-package com.godminq.dogcat
+package com.godminq.dogcat.ui.today
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.godminq.dogcat.R
 import com.godminq.dogcat.adapters.*
 import com.godminq.dogcat.databinding.FragmentTodayViewPagerBinding
 import com.google.android.material.tabs.TabLayoutMediator

@@ -1,15 +1,11 @@
-package com.godminq.dogcat
+package com.godminq.dogcat.ui
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
