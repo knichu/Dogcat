@@ -16,27 +16,4 @@
     </fragment>
 
 
-    <fragment
-        android:id="@+id/today_dog_tab_fragment"
-        android:name="com.godminq.dogcat.ui.today.TodayDogTabFragment"
-        android:label="@string/today_dogcat_details_title"
-        tools:layout="@layout/fragment_today_dog_tab">
-
-        <argument
-            android:name="todayDogcat2"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/today_cat_tab_fragment"
-        android:name="com.godminq.dogcat.ui.today.TodayCatTabFragment"
-        android:label="@string/today_dogcat_details_title"
-        tools:layout="@layout/fragment_today_cat_tab">
-        <argument
-            android:name="todayDogcat3"
-            app:argType="string" />
-    </fragment>
-
-
-
 </navigation>

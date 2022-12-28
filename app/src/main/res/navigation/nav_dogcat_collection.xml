@@ -11,20 +11,6 @@
         tools:layout="@layout/fragment_select_dogcat_collection"
         android:label="dogcatCollectionFragment">
         <action
-            android:id="@+id/action_dogcatCollectionFragment_to_dogCollectionFragment"
-            app:destination="@id/dogCollectionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_dogcatCollectionFragment_to_catCollectionFragment"
-            app:destination="@id/catCollectionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_dogcatCollectionFragment_to_dogAndCatCollectionFragment"
             app:destination="@id/dogAndCatCollectionFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -34,20 +20,21 @@
     </fragment>
 
     <fragment
-    android:id="@+id/catCollectionFragment"
-    android:name="com.godminq.dogcat.ui.collection.CatCollectionFragment"
-    tools:layout="@layout/fragment_cat_collection"
-    android:label="CatCollectionFragment">
-    </fragment>
-    <fragment
-        android:id="@+id/dogCollectionFragment"
-        android:name="com.godminq.dogcat.ui.collection.DogCollectionFragment"
-        tools:layout="@layout/fragment_dog_collection"
-        android:label="DogCollectionFragment">
-    </fragment>
-    <fragment
         android:id="@+id/dogAndCatCollectionFragment"
         android:name="com.godminq.dogcat.ui.collection.DogAndCatCollectionFragment"
         tools:layout="@layout/fragment_dog_and_cat_collection"
-        android:label="DogAndCatCollectionFragment" />
+        android:label="DogAndCatCollectionFragment" >
+        <action
+            android:id="@+id/action_dogAndCatCollectionFragment_to_detailDogAndCatCollectionFragment"
+            app:destination="@id/detailDogAndCatCollectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailDogAndCatCollectionFragment"
+        android:name="com.godminq.dogcat.ui.collection.DetailDogAndCatCollectionFragment"
+        tools:layout="@layout/fragment_detail_dog_and_cat_collection"
+        android:label="DetailDogAndCatCollectionFragment" />
 </navigation>

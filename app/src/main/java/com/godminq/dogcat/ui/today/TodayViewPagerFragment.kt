@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.godminq.dogcat.R
 import com.godminq.dogcat.adapters.*
 import com.godminq.dogcat.databinding.FragmentTodayViewPagerBinding
+import com.godminq.dogcat.viewmodels.TodayViewPagerViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TodayViewPagerFragment : Fragment() {
+
+//    private val todayViewPagerViewModel :TodayViewPagerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
