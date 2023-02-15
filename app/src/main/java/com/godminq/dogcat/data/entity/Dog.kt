@@ -1,42 +1,41 @@
 package com.godminq.dogcat.data.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import java.util.Calendar
 
-/*
 @Entity(tableName = "collected_dog")
-data class Dog (
+class Dog() : Animal() {
+
     @PrimaryKey(autoGenerate = true) @ColumnInfo
-    var id: Long,
+    var id: Long = 1
 
     @ColumnInfo
-    var category_id: Long,
+    var categoryId: Long? = 0
 
     @ColumnInfo
-    var category_name: String,
+    var categoryName: String = ""
 
     @Embedded
     var dogImage: DogImage? = null
-) {
+
     override fun toString(): String {
-        return "id = $id, category_id = $category_id, category_name = $category_name"
+        return "id = $id, categoryId = $categoryId, categoryName = $categoryName"
     }
+
+    override fun returnAnimalType(): String = "Dog"
 }
 
-data class DogImage (
-    @ColumnInfo
-    var like_check: Boolean = false
-) {
-    @ColumnInfo
-    var image_id: String? = null
+class DogImage () {
 
     @ColumnInfo
-    var image_url: String? = null
+    var likeCheck: Boolean = false
+
+    @ColumnInfo
+    var imageId: String? = null
+
+    @ColumnInfo
+    var imageUrl: String? = null
 
     @ColumnInfo(name = "date")
-    var datetime: Long? = null
+    var dateTime: Calendar? = Calendar.getInstance()
 }
-
- */

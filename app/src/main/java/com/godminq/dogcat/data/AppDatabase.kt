@@ -1,6 +1,7 @@
 package com.godminq.dogcat.data
-/*
+
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -14,10 +15,13 @@ import com.godminq.dogcat.data.dao.CatDao
 import com.godminq.dogcat.data.dao.DogDao
 import com.godminq.dogcat.data.entity.Cat
 import com.godminq.dogcat.data.entity.Dog
+import com.godminq.dogcat.utilites.CAT_DATA_FILENAME
 import com.godminq.dogcat.utilites.DATABASE_NAME
-import com.godminq.dogcat.utilites.DOGCAT_DATA_FILENAME
-import com.godminq.dogcat.workers.DogcatDatabaseWorker
-import com.godminq.dogcat.workers.DogcatDatabaseWorker.Companion.KEY_FILENAME
+import com.godminq.dogcat.utilites.DOG_DATA_FILENAME
+import com.godminq.dogcat.workers.CatDatabaseWorker
+import com.godminq.dogcat.workers.CatDatabaseWorker.Companion.KEY_FILENAME_CAT
+import com.godminq.dogcat.workers.DogDatabaseWorker
+import com.godminq.dogcat.workers.DogDatabaseWorker.Companion.KEY_FILENAME_DOG
 
 @Database(entities = [Dog::class, Cat::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -31,7 +35,9 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
+            Log.d("태그", "SS1")
             return instance ?: synchronized(this) {
+                Log.d("태그", "SS2")
                 instance ?: buildDatabase(context).also { instance = it }
             }
         }
@@ -39,16 +45,27 @@ abstract class AppDatabase : RoomDatabase() {
         // Create and pre-populate the database. See this article for more details:
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         // 잘 안되면 .addCallback 블록하고 DogcatDatabaseWorker.kt 지워보기
+        // + addcallback 부분은 필수가 아닌듯?
         private fun buildDatabase(context: Context): AppDatabase {
+            Log.d("태그", "SS3")
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .addCallback(
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<DogcatDatabaseWorker>()
-                                .setInputData(workDataOf(KEY_FILENAME to DOGCAT_DATA_FILENAME))
+                            Log.d("태그", "SS4")
+                            val dogRequest = OneTimeWorkRequestBuilder<DogDatabaseWorker>()
+                                .setInputData(workDataOf(KEY_FILENAME_DOG to DOG_DATA_FILENAME))
                                 .build()
-                            WorkManager.getInstance(context).enqueue(request)
+                            WorkManager.getInstance(context).enqueue(dogRequest)
+                            Log.d("태그", "SS5")
+
+                            val catRequest = OneTimeWorkRequestBuilder<CatDatabaseWorker>()
+                                .setInputData(workDataOf(KEY_FILENAME_CAT to CAT_DATA_FILENAME))
+                                .build()
+                            WorkManager.getInstance(context).enqueue(catRequest)
+                            Log.d("태그", "SS6")
+
                         }
                     }
                 )
@@ -56,9 +73,3 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
-
-
-
-
-
- */

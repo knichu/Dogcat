@@ -7,9 +7,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
-<!--        <variable-->
-<!--            name="image"-->
-<!--            type="com.godminq.dogcat.data.entity.AnimalImage"/>-->
+        <variable
+            name="viewModel"
+            type="com.godminq.dogcat.viewmodels.CollectionAdapterViewModel"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -32,7 +32,7 @@
                     android:layout_height="80dp"
                     android:contentDescription="item"
                     android:scaleType="centerCrop"
-
+                    app:imageFromUrl="@{viewModel.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
-
+                    android:text="@{viewModel.plantName}"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"

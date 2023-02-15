@@ -1,11 +1,12 @@
 package com.godminq.dogcat.data.dao
-/*
+
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.godminq.dogcat.data.entity.Cat
 import kotlinx.coroutines.flow.Flow
+import java.util.Calendar
 
 @Dao
 interface CatDao {
@@ -19,24 +20,22 @@ interface CatDao {
     @Query("SELECT * FROM collected_cat")
     fun getAllCat(): Flow<List<Cat>>
 
-    @Query("SELECT category_id FROM collected_cat")
+    @Query("SELECT categoryId FROM collected_cat")
     fun getAllCatCategory(): Flow<List<String>>
 
-    @Query("SELECT id FROM collected_cat where like_check = :boolean")
-    fun getSelectedCatLikeCheckList(boolean: Boolean): Flow<List<Long>>
+    @Query("SELECT id FROM collected_cat where likeCheck = :likeCheck")
+    fun getSelectedCatLikeCheckList(likeCheck: Boolean): Flow<List<Long>>
 
     // update query
-    @Query("UPDATE collected_cat SET like_check = :like_check WHERE id = :id")
-    fun updateCatLikeCheck(id: Long, like_check: Boolean)
+    @Query("UPDATE collected_cat SET likeCheck = :likeCheck WHERE id = :id")
+    suspend fun updateCatLikeCheck(id: Long, likeCheck: Boolean)
 
-    @Query("UPDATE collected_cat SET image_id = :image_id WHERE id = :id")
-    fun updateCatImageId(id: Long, image_id: String)
+    @Query("UPDATE collected_cat SET imageId = :imageId WHERE id = :id")
+    suspend fun updateCatImageId(id: Long, imageId: String)
 
-    @Query("UPDATE collected_cat SET image_url = :image_url WHERE id = :id")
-    fun updateCatImageUrl(id: Long, image_url: String)
+    @Query("UPDATE collected_cat SET imageUrl = :imageUrl WHERE id = :id")
+    suspend fun updateCatImageUrl(id: Long, imageUrl: String)
 
     @Query("UPDATE collected_cat SET date = :date WHERE id = :id")
-    fun updateCatDate(id: Long, date: Long)
+    suspend fun updateCatDate(id: Long, date: Calendar)
 }
-
- */

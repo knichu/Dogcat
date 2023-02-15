@@ -1,11 +1,12 @@
 package com.godminq.dogcat.data.dao
-/*
+
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.godminq.dogcat.data.entity.Dog
 import kotlinx.coroutines.flow.Flow
+import java.util.Calendar
 
 @Dao
 interface DogDao {
@@ -19,26 +20,27 @@ interface DogDao {
     @Query("SELECT * FROM collected_dog")
     fun getAllDog(): Flow<List<Dog>>
 
-    @Query("SELECT category_id FROM collected_dog")
-    fun getAllDogCategory(): Flow<List<String>>
+    // 쓸일없을듯?
+    @Query("SELECT categoryId FROM collected_dog")
+    fun getAllDogCategory(): Flow<List<Long>>
 
-    @Query("SELECT id FROM collected_dog where like_check = :boolean")
-    fun getSelectedDogLikeCheckList(boolean: Boolean): Flow<List<Long>>
+    @Query("SELECT id FROM collected_dog WHERE likeCheck = :likeCheck")
+    fun getSelectedDogLikeCheckList(likeCheck: Boolean): Flow<List<Long>>
+
+    // 쿼리 완성하기
+    @Query("SELECT categoryId FROM collected_dog WHERE id % 10 == 0")
+    fun getAllDogCategories(): Flow<List<Long>>
 
     // update query
-    @Query("UPDATE collected_dog SET like_check = :like_check WHERE id = :id")
-    fun updateDogLikeCheck(id: Long, like_check: Boolean)
+    @Query("UPDATE collected_dog SET likeCheck = :likeCheck WHERE id = :id")
+    suspend fun updateDogLikeCheck(id: Long, likeCheck: Boolean)
 
-    @Query("UPDATE collected_dog SET image_id = :image_id WHERE id = :id")
-    fun updateDogImageId(id: Long, image_id: String)
+    @Query("UPDATE collected_dog SET imageId = :imageId WHERE id = :id")
+    suspend fun updateDogImageId(id: Long, imageId: String)
 
-    @Query("UPDATE collected_dog SET image_url = :image_url WHERE id = :id")
-    fun updateDogImageUrl(id: Long, image_url: String)
+    @Query("UPDATE collected_dog SET imageUrl = :imageUrl WHERE id = :id")
+    suspend fun updateDogImageUrl(id: Long, imageUrl: String)
 
     @Query("UPDATE collected_dog SET date = :date WHERE id = :id")
-    fun updateDogDate(id: Long, date: Long)
-
+    suspend fun updateDogDate(id: Long, date: Calendar)
 }
-
-
- */

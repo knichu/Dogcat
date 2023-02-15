@@ -10,6 +10,9 @@ buildscript {
         classpath(libs.kotlin.gradle.plugin)
         classpath(libs.androidx.navigation.safe.args.gradle.plugin)
         classpath(libs.hilt.android.gradle.plugin)
+
+        val nav_version = "2.5.3"
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
     }
 }
 

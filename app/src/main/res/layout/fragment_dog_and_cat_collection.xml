@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,10 +20,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Animal"
+            android:text="@{viewModel.animal.returnAnimalType()}"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Animal"/>
 
         <ImageView
             android:id="@+id/collection_title_image_view"
@@ -46,5 +53,15 @@
             app:spanCount="3"
 
             tools:listitem="@layout/list_item_image" />
+
+        <TextView
+            android:id="@+id/testingTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="test"
+            app:layout_constraintBottom_toBottomOf="@+id/collection_title_image_view"
+            app:layout_constraintStart_toEndOf="@+id/collection_title_image_view"
+            app:layout_constraintTop_toTopOf="@+id/collection_title_image_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
