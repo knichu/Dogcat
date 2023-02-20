@@ -17,15 +17,22 @@ import com.godminq.dogcat.data.repo.TheDogApiRepository
 import com.godminq.dogcat.ui.collection.DogAndCatCollectionFragmentArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DogAndCatCollectionViewModel @Inject constructor(
     private val dogRepository : DogRepository,
     private val catRepository : CatRepository,
-    private val theDogApiRepository: TheDogApiRepository,
-    private val theCatApiRepository: TheCatApiRepository
+//    private val theDogApiRepository: TheDogApiRepository,
+//    private val theCatApiRepository: TheCatApiRepository
 ): ViewModel() {
+
+    val dog: LiveData<List<Dog>> =
+        dogRepository.getAllDog().asLiveData()
+
+    val cat: LiveData<List<Cat>> =
+        catRepository.getAllCat().asLiveData()
 
     private val _animal: MutableLiveData<Animal> = MutableLiveData()
     val animal: LiveData<Animal> = _animal
@@ -36,38 +43,28 @@ class DogAndCatCollectionViewModel @Inject constructor(
 //    private val _animalListItem: MutableLiveData<List<Int>> = MutableLiveData()
 //    val animalListItem: LiveData<List<Int>> = _animalListItem
 
-    private val _likes: MutableLiveData<Int> = MutableLiveData()
-    val likes: LiveData<Int> = _likes
+//    private var currentQueryValue: String? = null
+//    private var currentSearchResult: Flow<PagingData<DogAndCat>>? = null
+//    fun searchPictures(queryString: String): Flow<PagingData<DogAndCat>> {
+//        currentQueryValue = queryString
+//        if (queryString == "Dog") {
+//            val newResult: Flow<PagingData<DogAndCat>> =
+//                theDogApiRepository.getSearchResultStream(queryString).cachedIn(viewModelScope)
+//            currentSearchResult = newResult
+//            return newResult
+//        }
+//        //Cat
+//        else {
+//            val newResult: Flow<PagingData<DogAndCat>> =
+//                theCatApiRepository.getSearchResultStream(queryString).cachedIn(viewModelScope)
+//            currentSearchResult = newResult
+//            return newResult
+//        }
+//    }
 
-
-    private var currentQueryValue: String? = null
-    private var currentSearchResult: Flow<PagingData<DogAndCat>>? = null
-
-    fun searchPictures(queryString: String): Flow<PagingData<DogAndCat>> {
-        currentQueryValue = queryString
-        if (queryString == "Dog") {
-            val newResult: Flow<PagingData<DogAndCat>> =
-                theDogApiRepository.getSearchResultStream(queryString).cachedIn(viewModelScope)
-            currentSearchResult = newResult
-            return newResult
-        }
-        //Cat
-        else {
-            val newResult: Flow<PagingData<DogAndCat>> =
-                theCatApiRepository.getSearchResultStream(queryString).cachedIn(viewModelScope)
-            currentSearchResult = newResult
-            return newResult
-        }
-    }
-
-
-    //test
-    val getTestDog: LiveData<List<Dog>> = dogRepository.getAllDog().asLiveData()
 
     init {
-        Log.d("태그", "viewModel1")
         _animal.value = Dog()
-        Log.d("태그", "viewModel2")
     }
 
     fun setAnimalType(animalType : String?) {

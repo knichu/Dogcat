@@ -17,7 +17,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.godminq.dogcat.adapters.DogAndCatCollectionAdapter
+import com.godminq.dogcat.adapters.CollectionCatAdapter
+import com.godminq.dogcat.adapters.CollectionDogAdapter
 import com.godminq.dogcat.databinding.FragmentDogAndCatCollectionBinding
 import com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel
 
@@ -30,7 +31,11 @@ import kotlinx.coroutines.launch
 class DogAndCatCollectionFragment : Fragment() {
 
     private lateinit var binding: FragmentDogAndCatCollectionBinding
-    private val adapter = DogAndCatCollectionAdapter()
+
+    // 지연 호출 문제 없으면 cat도 지연호출 할것
+    private val dogAdapter by lazy { CollectionDogAdapter() }
+    private val catAdapter = CollectionCatAdapter()
+
     private val args by navArgs<DogAndCatCollectionFragmentArgs>()
     private var searchJob: Job? = null
     private val viewModel: DogAndCatCollectionViewModel by viewModels()
@@ -43,7 +48,7 @@ class DogAndCatCollectionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 //        val view = inflater.inflate(R.layout.fragment_dog_and_cat_collection, container, false)
         binding = DataBindingUtil.inflate(
             inflater,
@@ -53,7 +58,6 @@ class DogAndCatCollectionFragment : Fragment() {
         )
 
         Log.d("태그", "collection0")
-//        viewModel = ViewModelProvider(this)[DogAndCatCollectionViewModel::class.java]
         binding.viewModel = viewModel
         Log.d("태그", "collection1")
         binding.lifecycleOwner = this
@@ -62,47 +66,38 @@ class DogAndCatCollectionFragment : Fragment() {
         viewModel.setAnimalType(args.animalTitle)
         Log.d("태그", "collection3")
 
+
         // adapter 연결
-        binding.animalCollectionRecyclerView.adapter = adapter
-        args.animalTitle?.let { search(it) }
-
-        // db test - test 후 지우기
-//        viewModel.getTestDog.observe(viewLifecycleOwner){
-//            Log.d("태그", "collection4")
-//        }
-//        Log.d("태그", "collection5")
-
-//        with(viewDataBinding) {
-//
-//        }
-
-//        viewModel.setAnimalType(args.animalTitle)
-//
-//        Log.d("로그", "시작3, ${viewModel.animal.value}")
-//
-//        with(viewModel) {
-//            Log.d("로그", "시작4")
-//            animal.observe(viewLifecycleOwner) {
-//                Log.d("로그", "시작5, ${it.animalType}")
-//
-////                viewDataBinding.collectionTitle.text = it.animalType
-//
-//                Log.d("로그", "시작6")
-//            }
-//        }
-
+        when (args.animalTitle) {
+            "Dog" -> {
+                binding.animalCollectionRecyclerView.adapter = dogAdapter
+                subscribeDogUi(dogAdapter, binding)
+            }
+            "Cat" -> {
+                binding.animalCollectionRecyclerView.adapter = catAdapter
+                subscribeCatUi(catAdapter, binding)
+            }
+        }
         return binding.root
     }
 
-    private fun search(query: String) {
-        // Make sure we cancel the previous job before creating a new one
-        searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
-            viewModel.searchPictures(query).collectLatest {
-                adapter.submitData(it)
+    private fun subscribeDogUi(adapter: CollectionDogAdapter, binding: FragmentDogAndCatCollectionBinding) =
+        viewModel.dog.observe(viewLifecycleOwner) {
+            binding.hasLikedAnimal = it.isNotEmpty()
+            adapter.submitList(it) {
+                // At this point, the content should be drawn
+                activity?.reportFullyDrawn()
             }
         }
-    }
+
+    private fun subscribeCatUi(adapter: CollectionCatAdapter, binding: FragmentDogAndCatCollectionBinding) =
+        viewModel.cat.observe(viewLifecycleOwner) {
+            binding.hasLikedAnimal = it.isNotEmpty()
+            adapter.submitList(it) {
+                // At this point, the content should be drawn
+                activity?.reportFullyDrawn()
+            }
+        }
 }
 
 

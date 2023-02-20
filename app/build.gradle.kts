@@ -20,6 +20,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner  = "androidx.test.runner.AndroidJUnitRunner"
+
+//        buildConfigField("String", "THE_DOG_API_ACCESS_KEY", "\"" + getTheDogApiAccess() + "\"")
+//        buildConfigField("String", "THE_CAT_API_ACCESS_KEY", "\"" + getTheCatApiAccess() + "\"")
+
+        // @InstallIn 무시 코드
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
+        }
     }
 
     buildTypes {
@@ -99,3 +109,10 @@ dependencies {
     implementation(libs.coil.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
+
+//fun getTheDogApiAccess(): String? {
+//    return project.findProperty("the_dog_api_access_key") as? String
+//}
+//fun getTheCatApiAccess(): String? {
+//    return project.findProperty("the_cat_api_access_key") as? String
+//}

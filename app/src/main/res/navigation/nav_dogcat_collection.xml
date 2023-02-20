@@ -24,33 +24,8 @@
         android:name="com.godminq.dogcat.ui.collection.DogAndCatCollectionFragment"
         tools:layout="@layout/fragment_dog_and_cat_collection"
         android:label="DogAndCatCollectionFragment" >
-        <action
-            android:id="@+id/action_dogAndCatCollectionFragment_to_detailDogAndCatCollectionFragment"
-            app:destination="@id/detailDogAndCatCollectionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="animalTitle"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailDogAndCatCollectionFragment"
-        android:name="com.godminq.dogcat.ui.collection.DetailDogAndCatCollectionFragment"
-        tools:layout="@layout/fragment_detail_dog_and_cat_collection"
-        android:label="DetailDogAndCatCollectionFragment" >
-
-        <argument
-            android:name="animalTitle"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-
-        <argument
-            android:name="animalDetailTitle"
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />

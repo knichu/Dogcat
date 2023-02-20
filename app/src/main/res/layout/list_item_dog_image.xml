@@ -7,9 +7,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
-<!--        <variable-->
-<!--            name="image"-->
-<!--            type="com.godminq.dogcat.data.entity.AnimalImage"/>-->
+        <variable
+            name="viewModel"
+            type="com.godminq.dogcat.viewmodels.CollectionDogAdapterViewModel"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -27,30 +27,30 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/animal_detail_image"
+                    android:id="@+id/animal_dog_image"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:contentDescription="item"
                     android:scaleType="centerCrop"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:imageFromUrl="@{viewModel.animalUrl}" />
 
                 <TextView
-                    android:id="@+id/animal_detail_collected_date"
+                    android:id="@+id/animal_dog_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
-
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/animal_detail_image"
+                    app:layout_constraintTop_toBottomOf="@id/animal_dog_image"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="2022.12.10"/>
+                    tools:text="2023.02.16"
+                    android:text="@{viewModel.likingDogDateString}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

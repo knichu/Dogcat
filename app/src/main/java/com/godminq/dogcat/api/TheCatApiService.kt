@@ -1,6 +1,6 @@
 package com.godminq.dogcat.api
 
-import com.godminq.dogcat.BuildConfig
+import com.godminq.dogcat.data.entity.TheCatApiSearchResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,15 +8,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+val THE_CAT_API_ACCESS_KEY = "live_pLEpaOnZA1lVZGWePOYvrNNlJzB5fCb5oS6hsM6dR5GQhM96nJmGY13KRW5uoKMz"
+
 interface TheCatApiService {
 
     @GET("v1/images/search")
     suspend fun searchImages(
-        @Query("id") id: String,
-        @Query("url") url: String,
-        @Query("width") width: Int,
-        @Query("height") height: Int
-    ) // 빠진부분 채워넣기(이부분 빠짐)
+        @Query("limit") limit: Int,
+        @Query("mime_types") mimeTypes: String,
+        @Query("api_key") apiKey: String = THE_CAT_API_ACCESS_KEY
+    ): List<TheCatApiSearchResponse>
 
     companion object {
         private const val BASE_URL = "https://api.thecatapi.com/"

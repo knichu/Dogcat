@@ -4,38 +4,45 @@ import androidx.room.*
 import java.util.Calendar
 
 @Entity(tableName = "collected_dog")
-class Dog() : Animal() {
-
-    @PrimaryKey(autoGenerate = true) @ColumnInfo
-    var id: Long = 1
+data class Dog(
+    @ColumnInfo
+    var id: String? = "",
 
     @ColumnInfo
-    var categoryId: Long? = 0
+    var url: String? = "",
 
     @ColumnInfo
-    var categoryName: String = ""
-
-    @Embedded
-    var dogImage: DogImage? = null
-
-    override fun toString(): String {
-        return "id = $id, categoryId = $categoryId, categoryName = $categoryName"
-    }
-
-    override fun returnAnimalType(): String = "Dog"
-}
-
-class DogImage () {
+    var width: Long? = 0,
 
     @ColumnInfo
-    var likeCheck: Boolean = false
-
-    @ColumnInfo
-    var imageId: String? = null
-
-    @ColumnInfo
-    var imageUrl: String? = null
+    var height: Long? = 0,
 
     @ColumnInfo(name = "date")
     var dateTime: Calendar? = Calendar.getInstance()
+
+) : Animal() {
+
+    @PrimaryKey(autoGenerate = true) @ColumnInfo
+    var primaryId: Long = 1
+
+//    @ColumnInfo
+//    var id: String? = ""
+//
+//    @ColumnInfo
+//    var url: String? = ""
+//
+//    @ColumnInfo
+//    var width: Long? = 0
+//
+//    @ColumnInfo
+//    var height: Long? = 0
+//
+//    @ColumnInfo(name = "date")
+//    var dateTime: Calendar? = Calendar.getInstance()
+
+    override fun toString(): String {
+        return "primaryId = $primaryId, id = $id, url = $url"
+    }
+
+    override fun returnAnimalType(): String = "Dog"
 }

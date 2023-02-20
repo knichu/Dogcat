@@ -49,26 +49,29 @@ abstract class AppDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context): AppDatabase {
             Log.d("태그", "SS3")
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            Log.d("태그", "SS4")
-                            val dogRequest = OneTimeWorkRequestBuilder<DogDatabaseWorker>()
-                                .setInputData(workDataOf(KEY_FILENAME_DOG to DOG_DATA_FILENAME))
-                                .build()
-                            WorkManager.getInstance(context).enqueue(dogRequest)
-                            Log.d("태그", "SS5")
+//                .addCallback(
+//                    object : RoomDatabase.Callback() {
+//                        override fun onCreate(db: SupportSQLiteDatabase) {
+//                            super.onCreate(db)
+//                            Log.d("태그", "SS4")
+//                            val dogRequest = OneTimeWorkRequestBuilder<DogDatabaseWorker>()
+//                                .setInputData(workDataOf(KEY_FILENAME_DOG to DOG_DATA_FILENAME))
+//                                .build()
+//                            WorkManager.getInstance(context).enqueue(dogRequest)
+//                            Log.d("태그", "SS5")
+//
+//                            val catRequest = OneTimeWorkRequestBuilder<CatDatabaseWorker>()
+//                                .setInputData(workDataOf(KEY_FILENAME_CAT to CAT_DATA_FILENAME))
+//                                .build()
+//                            WorkManager.getInstance(context).enqueue(catRequest)
+//                            Log.d("태그", "SS6")
+//
+//                        }
+//                    }
+//                )
+                // 임시로 추가
+                .allowMainThreadQueries()
 
-                            val catRequest = OneTimeWorkRequestBuilder<CatDatabaseWorker>()
-                                .setInputData(workDataOf(KEY_FILENAME_CAT to CAT_DATA_FILENAME))
-                                .build()
-                            WorkManager.getInstance(context).enqueue(catRequest)
-                            Log.d("태그", "SS6")
-
-                        }
-                    }
-                )
                 .build()
         }
     }

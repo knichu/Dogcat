@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel"/>
+        <variable
+            name="hasLikedAnimal"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,15 +47,14 @@
             android:clipToPadding="false"
             android:paddingStart="@dimen/card_side_margin"
             android:paddingEnd="@dimen/card_side_margin"
-
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collection_title"
             app:spanCount="3"
-
-            tools:listitem="@layout/list_item_image" />
+            tools:listitem="@layout/list_item_dog_image"
+            app:isGone="@{!hasLikedAnimal}" />
 
         <TextView
             android:id="@+id/testingTV"
@@ -63,5 +65,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/collection_title_image_view"
             app:layout_constraintStart_toEndOf="@+id/collection_title_image_view"
             app:layout_constraintTop_toTopOf="@+id/collection_title_image_view" />
+
+        <TextView
+            android:id="@+id/noContentsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Empty"
+            android:textSize="48sp"
+            app:isGone="@{hasLikedAnimal}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/animal_collection_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/animal_collection_recycler_view"
+            app:layout_constraintTop_toBottomOf="@+id/collection_title" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
