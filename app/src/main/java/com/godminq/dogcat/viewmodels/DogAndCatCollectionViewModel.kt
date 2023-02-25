@@ -9,7 +9,6 @@ import androidx.paging.cachedIn
 import com.godminq.dogcat.data.entity.Animal
 import com.godminq.dogcat.data.entity.Cat
 import com.godminq.dogcat.data.entity.Dog
-import com.godminq.dogcat.data.entity.DogAndCat
 import com.godminq.dogcat.data.repo.CatRepository
 import com.godminq.dogcat.data.repo.DogRepository
 import com.godminq.dogcat.data.repo.TheCatApiRepository

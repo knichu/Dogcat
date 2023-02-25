@@ -9,7 +9,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="com.godminq.dogcat.viewmodels.CollectionDogAdapterViewModel"/>
+            type="com.godminq.dogcat.viewmodels.CollectionCatAdapterViewModel"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/animal_dog_image"
+                    android:id="@+id/animal_cat_collection_image"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:contentDescription="item"
@@ -38,7 +38,7 @@
                     app:imageFromUrl="@{viewModel.animalUrl}" />
 
                 <TextView
-                    android:id="@+id/animal_dog_date"
+                    android:id="@+id/animal_cat_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -47,10 +47,10 @@
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/animal_dog_image"
+                    app:layout_constraintTop_toBottomOf="@id/animal_cat_collection_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="2023.02.16"
-                    android:text="@{viewModel.likingDogDateString}" />
+                    android:text="@{viewModel.likingCatDateString}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

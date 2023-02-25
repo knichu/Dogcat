@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.data.entity.Dog
-import com.godminq.dogcat.databinding.ListItemDogImageBinding
+import com.godminq.dogcat.databinding.ListItemDogCollectionBinding
 import com.godminq.dogcat.viewmodels.CollectionDogAdapterViewModel
 
 class CollectionDogAdapter :
@@ -20,7 +20,7 @@ class CollectionDogAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_dog_image,
+                R.layout.list_item_dog_collection,
                 parent,
                 false
             )
@@ -35,7 +35,7 @@ class CollectionDogAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListItemDogImageBinding
+        private val binding: ListItemDogCollectionBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
 //            // setClickListener 는 여기에서 설정

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.data.entity.Cat
-import com.godminq.dogcat.databinding.ListItemCatImageBinding
+import com.godminq.dogcat.databinding.ListItemCatCollectionBinding
 import com.godminq.dogcat.viewmodels.CollectionCatAdapterViewModel
 
 class CollectionCatAdapter :
@@ -20,7 +20,7 @@ class CollectionCatAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_cat_image,
+                R.layout.list_item_cat_collection,
                 parent,
                 false
             )
@@ -35,7 +35,7 @@ class CollectionCatAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListItemCatImageBinding
+        private val binding: ListItemCatCollectionBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
 //            // setClickListener 는 여기에서 설정

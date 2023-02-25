@@ -18,10 +18,6 @@ import com.godminq.dogcat.data.entity.Dog
 import com.godminq.dogcat.utilites.CAT_DATA_FILENAME
 import com.godminq.dogcat.utilites.DATABASE_NAME
 import com.godminq.dogcat.utilites.DOG_DATA_FILENAME
-import com.godminq.dogcat.workers.CatDatabaseWorker
-import com.godminq.dogcat.workers.CatDatabaseWorker.Companion.KEY_FILENAME_CAT
-import com.godminq.dogcat.workers.DogDatabaseWorker
-import com.godminq.dogcat.workers.DogDatabaseWorker.Companion.KEY_FILENAME_DOG
 
 @Database(entities = [Dog::class, Cat::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -70,7 +66,7 @@ abstract class AppDatabase : RoomDatabase() {
 //                    }
 //                )
                 // 임시로 추가
-                .allowMainThreadQueries()
+//                .allowMainThreadQueries()
 
                 .build()
         }

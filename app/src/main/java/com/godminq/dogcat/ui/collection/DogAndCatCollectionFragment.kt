@@ -31,13 +31,9 @@ import kotlinx.coroutines.launch
 class DogAndCatCollectionFragment : Fragment() {
 
     private lateinit var binding: FragmentDogAndCatCollectionBinding
-
-    // 지연 호출 문제 없으면 cat도 지연호출 할것
-    private val dogAdapter by lazy { CollectionDogAdapter() }
-    private val catAdapter = CollectionCatAdapter()
-
+    private val collectionDogAdapter by lazy { CollectionDogAdapter() }
+    private val collectionCatAdapter by lazy { CollectionCatAdapter() }
     private val args by navArgs<DogAndCatCollectionFragmentArgs>()
-    private var searchJob: Job? = null
     private val viewModel: DogAndCatCollectionViewModel by viewModels()
 
 //    private var _viewDataBinding: FragmentDogAndCatCollectionBinding? = null
@@ -70,12 +66,12 @@ class DogAndCatCollectionFragment : Fragment() {
         // adapter 연결
         when (args.animalTitle) {
             "Dog" -> {
-                binding.animalCollectionRecyclerView.adapter = dogAdapter
-                subscribeDogUi(dogAdapter, binding)
+                binding.animalCollectionRecyclerView.adapter = collectionDogAdapter
+                subscribeDogUi(collectionDogAdapter, binding)
             }
             "Cat" -> {
-                binding.animalCollectionRecyclerView.adapter = catAdapter
-                subscribeCatUi(catAdapter, binding)
+                binding.animalCollectionRecyclerView.adapter = collectionCatAdapter
+                subscribeCatUi(collectionCatAdapter, binding)
             }
         }
         return binding.root

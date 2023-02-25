@@ -1,5 +1,6 @@
 package com.godminq.dogcat.api
 
+import android.util.Log
 import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,19 +17,21 @@ interface TheDogApiService {
     suspend fun searchImages(
         @Query("limit") limit: Int,
         @Query("mime_types") mimeTypes: String,
-        @Query("api_key") apiKey: String = THE_DOG_API_ACCESS_KEY
+        @Query("page") page: Int,
+//        @Query("api_key") apiKey: String = THE_DOG_API_ACCESS_KEY
     ): List<TheDogApiSearchResponse>
 
     companion object {
         private const val BASE_URL = "https://api.thedogapi.com/"
 
         fun create(): TheDogApiService {
+            Log.d("태그", "TheDogApiService create1")
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
-
+            Log.d("태그", "TheDogApiService create2")
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)
                 .build()
-
+            Log.d("태그", "TheDogApiService create3")
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)

@@ -16,6 +16,7 @@
 
 package com.godminq.dogcat.di
 
+import android.util.Log
 import com.godminq.dogcat.api.TheCatApiService
 import com.godminq.dogcat.api.TheDogApiService
 import dagger.Module
@@ -31,6 +32,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideTheDogApiService(): TheDogApiService {
+        Log.d("태그", "NetworkModule1")
         return TheDogApiService.create()
     }
 
