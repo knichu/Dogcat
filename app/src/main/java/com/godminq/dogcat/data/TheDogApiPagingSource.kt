@@ -25,7 +25,7 @@ class TheDogApiPagingSource(
             LoadResult.Page(
                 data = images,
                 prevKey = if (page == THE_DOG_API_STARTING_PAGE_INDEX) null else page - 1,
-                nextKey = if (page == 1) null else page + 1
+                nextKey = if (page == 100) null else page + 1
             )
 
 
@@ -33,6 +33,7 @@ class TheDogApiPagingSource(
 //            val error123 =
 //            Log.d("태그", "$error123, catch testing")
             LoadResult.Error(exception)
+
         }
     }
 

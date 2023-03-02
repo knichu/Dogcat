@@ -1,7 +1,5 @@
 package com.godminq.dogcat.adapters
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,13 +7,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
-import com.godminq.dogcat.adapters.TodayDogTabAdapter.DogTabViewHolder
-import com.godminq.dogcat.data.entity.Dog
+import com.godminq.dogcat.adapters.TodayDogTabPagingDataAdapter.DogTabViewHolder
 import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
 import com.godminq.dogcat.databinding.ListItemTodayDogBinding
-import com.godminq.dogcat.viewmodels.CollectionDogAdapterViewModel
 
-class TodayDogTabAdapter :
+class TodayDogTabPagingDataAdapter :
     PagingDataAdapter<TheDogApiSearchResponse, DogTabViewHolder>(
         GalleryDiffCallback()
     ) {

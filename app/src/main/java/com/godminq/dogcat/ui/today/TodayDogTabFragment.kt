@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.godminq.dogcat.R
-import com.godminq.dogcat.adapters.TodayDogTabAdapter
+import com.godminq.dogcat.adapters.TodayDogTabLoadStateAdapter
+import com.godminq.dogcat.adapters.TodayDogTabPagingDataAdapter
 import com.godminq.dogcat.databinding.FragmentTodayDogTabBinding
 import com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel
 import com.godminq.dogcat.viewmodels.TodayDogTabViewModel
@@ -23,7 +25,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TodayDogTabFragment : Fragment() {
 
-    private val adapter = TodayDogTabAdapter()
+    private val adapter = TodayDogTabPagingDataAdapter()
     private lateinit var binding: FragmentTodayDogTabBinding
     private var searchJob: Job? = null
     private val viewModel: TodayDogTabViewModel by viewModels()
@@ -45,15 +47,20 @@ class TodayDogTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("태그", "dog tab fragment1")
-        binding.imageList.adapter = adapter
-        Log.d("태그", "dog tab fragment2")
-        if (adapter.itemCount == 10) {
+        // init recyclerView
+        binding.imageList.adapter = adapter.withLoadStateFooter(
+            footer = TodayDogTabLoadStateAdapter { adapter.retry() }
+        )
 
-        } else {
+        // activate one swipe, one move
+        val snap = PagerSnapHelper()
+        snap.attachToRecyclerView(binding.imageList)
+
+        // api
+        if (adapter.itemCount < 10) {
             searchDog(3)
         }
-        Log.d("태그", "dog tab fragment3")
+
     }
 
     private fun searchDog(limit: Int) {
