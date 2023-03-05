@@ -23,22 +23,7 @@ data class Cat(
 ) : Animal() {
 
     @PrimaryKey(autoGenerate = true) @ColumnInfo
-    var primaryId: Long = 1
-
-//    @ColumnInfo
-//    var id: String? = ""
-//
-//    @ColumnInfo
-//    var url: String? = ""
-//
-//    @ColumnInfo
-//    var width: Long? = 0
-//
-//    @ColumnInfo
-//    var height: Long? = 0
-//
-//    @ColumnInfo(name = "date")
-//    var dateTime: Calendar? = Calendar.getInstance()
+    var primaryId: Long = 0
 
     override fun toString(): String {
         return "primaryId = $primaryId, id = $id, url = $url"

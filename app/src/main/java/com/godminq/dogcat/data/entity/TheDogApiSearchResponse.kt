@@ -7,6 +7,6 @@ data class TheDogApiSearchResponse (
 //    @field:SerializedName("breeds") val breeds: List<Breeds?>,
     @field:SerializedName("id") val id: String,
     @field:SerializedName("url") val url: String,
-    @field:SerializedName("width") val width: Int,
-    @field:SerializedName("height") val height: Int
+    @field:SerializedName("width") val width: Long,
+    @field:SerializedName("height") val height: Long
 )

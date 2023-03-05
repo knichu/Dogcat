@@ -12,6 +12,7 @@
 
         <argument
             android:name="todayDogcat1"
+
             app:argType="string" />
     </fragment>
 

@@ -2,7 +2,7 @@ package com.godminq.dogcat.data.repo
 
 import com.godminq.dogcat.data.dao.DogDao
 import com.godminq.dogcat.data.entity.Dog
-import java.util.Calendar
+import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,6 +19,16 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
     suspend fun insertDog(dog: Dog) = dogDao.insertDog(dog)
 
     suspend fun deleteDog(dog: Dog) = dogDao.deleteDog(dog)
+
+    suspend fun insertDogData(theDogApiSearchResponse: TheDogApiSearchResponse) {
+        val id = theDogApiSearchResponse.id
+        val url = theDogApiSearchResponse.url
+        val width = theDogApiSearchResponse.width
+        val height = theDogApiSearchResponse.height
+        val dogData = Dog(id, url, width, height)
+        dogDao.insertDogData(dogData)
+    }
+
 
     companion object {
 

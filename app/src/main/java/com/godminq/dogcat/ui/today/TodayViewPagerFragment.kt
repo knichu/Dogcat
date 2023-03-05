@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import com.godminq.dogcat.R
 import com.godminq.dogcat.adapters.*
 import com.godminq.dogcat.databinding.FragmentTodayViewPagerBinding
+import com.godminq.dogcat.viewmodels.TodayViewPagerViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TodayViewPagerFragment : Fragment() {
 
     private lateinit var binding: FragmentTodayViewPagerBinding
+    private val viewModel: TodayViewPagerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,23 +54,6 @@ class TodayViewPagerFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
-        // fab
-        binding.fab.setOnClickListener {
-            when (binding.todayViewPager.currentItem) {
-                0 -> {
-
-
-                    Log.d("태그", "check1")
-                    Toast.makeText(context, "check1", Toast.LENGTH_SHORT).show()
-                }
-                1 -> {
-
-
-                    Log.d("태그", "check2")
-                    Toast.makeText(context, "check2", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     // 각 selector 부분 새로 만들어야함

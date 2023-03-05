@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.PagerSnapHelper
 import com.godminq.dogcat.R
 import com.godminq.dogcat.adapters.TodayDogTabLoadStateAdapter
 import com.godminq.dogcat.adapters.TodayDogTabPagingDataAdapter
 import com.godminq.dogcat.databinding.FragmentTodayDogTabBinding
-import com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel
 import com.godminq.dogcat.viewmodels.TodayDogTabViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -47,18 +44,26 @@ class TodayDogTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val recyclerView = binding.imageList
+
         // init recyclerView
-        binding.imageList.adapter = adapter.withLoadStateFooter(
+        recyclerView.adapter = adapter.withLoadStateFooter(
             footer = TodayDogTabLoadStateAdapter { adapter.retry() }
         )
 
         // activate one swipe, one move
-        val snap = PagerSnapHelper()
-        snap.attachToRecyclerView(binding.imageList)
+        viewModel.snap.attachToRecyclerView(recyclerView)
 
-        // api
+        // api loading
         if (adapter.itemCount < 10) {
             searchDog(3)
+        }
+
+        // save image
+        binding.dogFab.setOnClickListener {
+            val savingData = adapter.getItemData(viewModel.getCurrentItemPosition(recyclerView))
+            Log.d("태그", "data = $savingData")
+            viewModel.addImageToCollection(savingData)
         }
 
     }
@@ -77,4 +82,7 @@ class TodayDogTabFragment : Fragment() {
             }
         }
     }
+
+    // 현재 보이는 아이템의 위치를 얻는 메서드
+
 }

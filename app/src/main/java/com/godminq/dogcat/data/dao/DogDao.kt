@@ -3,7 +3,6 @@ package com.godminq.dogcat.data.dao
 import androidx.room.*
 import com.godminq.dogcat.data.entity.Dog
 import kotlinx.coroutines.flow.Flow
-import java.util.Calendar
 
 @Dao
 interface DogDao {
@@ -18,9 +17,12 @@ interface DogDao {
     @Query("SELECT url FROM collected_dog")
     fun getAllDogUrl(): Flow<List<String>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDog(dog: Dog): Long
 
     @Delete
     suspend fun deleteDog(dog: Dog)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDogData(dog: Dog)
 }

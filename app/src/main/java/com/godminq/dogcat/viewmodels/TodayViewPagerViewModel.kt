@@ -1,34 +1,24 @@
 package com.godminq.dogcat.viewmodels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.godminq.dogcat.data.entity.Animal
 import com.godminq.dogcat.data.entity.Cat
 import com.godminq.dogcat.data.entity.Dog
-import com.godminq.dogcat.data.repo.CatRepository
-import com.godminq.dogcat.data.repo.DogRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DogAndCatCollectionViewModel @Inject constructor(
-    private val dogRepository : DogRepository,
-    private val catRepository : CatRepository,
+class TodayViewPagerViewModel @Inject constructor(
+//    private val dogRepository : DogRepository,
+//    private val catRepository : CatRepository,
 //    private val theDogApiRepository: TheDogApiRepository,
 //    private val theCatApiRepository: TheCatApiRepository
 ): ViewModel() {
 
-    val dog: LiveData<List<Dog>> =
-        dogRepository.getAllDog().asLiveData()
-
-    val cat: LiveData<List<Cat>> =
-        catRepository.getAllCat().asLiveData()
-
     private val _animal: MutableLiveData<Animal> = MutableLiveData()
     val animal: LiveData<Animal> = _animal
-
-    init {
-        _animal.value = Dog()
-    }
 
     fun setAnimalType(animalType : String?) {
         when(animalType) {
@@ -43,4 +33,3 @@ class DogAndCatCollectionViewModel @Inject constructor(
 
 
 }
-
