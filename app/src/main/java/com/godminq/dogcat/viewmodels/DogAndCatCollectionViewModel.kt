@@ -1,6 +1,8 @@
 package com.godminq.dogcat.viewmodels
 
 import androidx.lifecycle.*
+import com.godminq.dogcat.adapters.CollectionCatAdapter
+import com.godminq.dogcat.adapters.CollectionDogAdapter
 import com.godminq.dogcat.data.entity.Animal
 import com.godminq.dogcat.data.entity.Cat
 import com.godminq.dogcat.data.entity.Dog
@@ -13,15 +15,13 @@ import javax.inject.Inject
 class DogAndCatCollectionViewModel @Inject constructor(
     private val dogRepository : DogRepository,
     private val catRepository : CatRepository,
-//    private val theDogApiRepository: TheDogApiRepository,
-//    private val theCatApiRepository: TheCatApiRepository
 ): ViewModel() {
 
-    val dog: LiveData<List<Dog>> =
-        dogRepository.getAllDog().asLiveData()
+    val dogRepo: DogRepository = dogRepository
+    val catRepo: CatRepository = catRepository
 
-    val cat: LiveData<List<Cat>> =
-        catRepository.getAllCat().asLiveData()
+    val dogRepoGetAllDog: LiveData<List<Dog>> = dogRepository.getAllDog().asLiveData()
+    val catRepoGetAllCat: LiveData<List<Cat>> = catRepository.getAllCat().asLiveData()
 
     private val _animal: MutableLiveData<Animal> = MutableLiveData()
     val animal: LiveData<Animal> = _animal

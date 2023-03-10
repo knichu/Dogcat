@@ -1,18 +1,30 @@
 package com.godminq.dogcat.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.data.entity.Cat
+import com.godminq.dogcat.data.entity.Dog
+import com.godminq.dogcat.data.repo.CatRepository
+import com.godminq.dogcat.data.repo.DogRepository
+import com.godminq.dogcat.databinding.FragmentDogAndCatCollectionBinding
 import com.godminq.dogcat.databinding.ListItemCatCollectionBinding
 import com.godminq.dogcat.viewmodels.CollectionCatAdapterViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CollectionCatAdapter :
-    ListAdapter<Cat, CollectionCatAdapter.ViewHolder>(
+class CollectionCatAdapter @Inject constructor(
+    private val catRepository: CatRepository,
+    private val fragmentBinding: FragmentDogAndCatCollectionBinding
+    ) : ListAdapter<Cat, CollectionCatAdapter.ViewHolder>(
         LikedCatDiffCallback()
     ) {
 
@@ -27,16 +39,30 @@ class CollectionCatAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val photo = getItem(position)
         if (photo != null) {
-            holder.bind(photo)
+            viewHolder.bind(photo)
+        }
+
+        viewHolder.deleteImageButton.setOnClickListener {
+            deleteItem(photo, position)
+        }
+
+        when(fragmentBinding.animalCollectionDeleteButton.text) {
+            "Delete" -> {
+                viewHolder.deleteImageButton.visibility = View.GONE
+            }
+            "Cancel" -> {
+                viewHolder.deleteImageButton.visibility = View.VISIBLE
+            }
         }
     }
 
     class ViewHolder(
         private val binding: ListItemCatCollectionBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        val deleteImageButton: ImageButton = binding.deleteCatImageButton
         init {
 //            // setClickListener 는 여기에서 설정
 //            // 클릭해서 넘어갈때 이부분 활성화
@@ -60,7 +86,14 @@ class CollectionCatAdapter :
                 executePendingBindings()
             }
         }
+    }
 
+    private fun deleteItem(cat: Cat, position: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            catRepository.deleteCat(cat)
+//            notifyItemRemoved(position)
+            notifyDataSetChanged()
+        }
     }
 }
 

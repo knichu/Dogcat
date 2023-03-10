@@ -32,10 +32,20 @@
                     android:layout_height="80dp"
                     android:contentDescription="item"
                     android:scaleType="centerCrop"
+                    app:imageFromUrl="@{viewModel.animalUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/delete_dog_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageFromUrl="@{viewModel.animalUrl}" />
+                    app:srcCompat="@drawable/ic_baseline_cancel_24" />
 
                 <TextView
                     android:id="@+id/animal_dog_date"

@@ -16,7 +16,8 @@ interface TheCatApiService {
     suspend fun searchImages(
         @Query("limit") limit: Int,
         @Query("mime_types") mimeTypes: String,
-        @Query("api_key") apiKey: String = THE_CAT_API_ACCESS_KEY
+        @Query("page") page: Int,
+//        @Query("api_key") apiKey: String = THE_CAT_API_ACCESS_KEY
     ): List<TheCatApiSearchResponse>
 
     companion object {

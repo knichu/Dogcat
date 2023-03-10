@@ -41,12 +41,17 @@ class TodayDogTabViewModel @Inject constructor(
         return snapView?.let { recyclerView.layoutManager?.getPosition(it) } ?: RecyclerView.NO_POSITION
     }
 
-    fun addImageToCollection(theDogApiSearchResponse: TheDogApiSearchResponse?) {
+    fun addImageDataToCollection(theDogApiSearchResponse: TheDogApiSearchResponse?) {
         viewModelScope.launch {
+            Log.d("태그", "addImageDataToCollection")
             if (theDogApiSearchResponse != null) {
                 dogRepository.insertDogData(theDogApiSearchResponse)
             }
         }
+    }
+
+    fun checkNumOfDogId(id: String): Flow<Int> {
+        return dogRepository.getNumOfDogId(id)
     }
 
 }

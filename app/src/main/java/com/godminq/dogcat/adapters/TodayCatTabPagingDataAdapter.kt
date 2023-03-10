@@ -2,48 +2,48 @@ package com.godminq.dogcat.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.databinding.DataBindingUtil
-import androidx.paging.DifferCallback
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
-import com.godminq.dogcat.adapters.TodayDogTabPagingDataAdapter.DogTabViewHolder
+import com.godminq.dogcat.adapters.TodayCatTabPagingDataAdapter.CatTabViewHolder
+import com.godminq.dogcat.data.entity.TheCatApiSearchResponse
 import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
+import com.godminq.dogcat.databinding.ListItemTodayCatBinding
 import com.godminq.dogcat.databinding.ListItemTodayDogBinding
 
-class TodayDogTabPagingDataAdapter :
-    PagingDataAdapter<TheDogApiSearchResponse, DogTabViewHolder>(
-        DogTabDiffCallback()
-    ) {
+class TodayCatTabPagingDataAdapter:
+    PagingDataAdapter<TheCatApiSearchResponse, CatTabViewHolder>(
+        CatTabDiffCallback()
+) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogTabViewHolder {
-        return DogTabViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatTabViewHolder {
+        return CatTabViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_today_dog,
+                R.layout.list_item_today_cat,
                 parent,
                 false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: DogTabViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CatTabViewHolder, position: Int) {
         val photo = getItem(position)
         if (photo != null) {
             holder.bind(photo)
         }
     }
 
-    class DogTabViewHolder(
-        private val binding: ListItemTodayDogBinding
+    class CatTabViewHolder(
+        private val binding: ListItemTodayCatBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
 
         }
 
-        fun bind(item: TheDogApiSearchResponse) {
+        fun bind(item: TheCatApiSearchResponse) {
             binding.apply {
                 response = item
                 executePendingBindings()
@@ -55,14 +55,14 @@ class TodayDogTabPagingDataAdapter :
 
 }
 
-private class DogTabDiffCallback : DiffUtil.ItemCallback<TheDogApiSearchResponse>() {
-    override fun areItemsTheSame(oldItem: TheDogApiSearchResponse, newItem: TheDogApiSearchResponse)
-    : Boolean {
+private class CatTabDiffCallback : DiffUtil.ItemCallback<TheCatApiSearchResponse>() {
+    override fun areItemsTheSame(oldItem: TheCatApiSearchResponse, newItem: TheCatApiSearchResponse)
+            : Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: TheDogApiSearchResponse, newItem: TheDogApiSearchResponse)
-    : Boolean {
+    override fun areContentsTheSame(oldItem: TheCatApiSearchResponse, newItem: TheCatApiSearchResponse)
+            : Boolean {
         return oldItem == newItem
     }
 }

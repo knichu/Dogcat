@@ -1,8 +1,10 @@
 package com.godminq.dogcat.data.repo
 
+import android.util.Log
 import com.godminq.dogcat.data.dao.DogDao
 import com.godminq.dogcat.data.entity.Dog
 import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +18,9 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
 
     fun getAllDogUrl() = dogDao.getAllDogUrl()
 
-    suspend fun insertDog(dog: Dog) = dogDao.insertDog(dog)
+    fun getDogId(id: String) = dogDao.getDogId(id)
+
+    fun getNumOfDogId(id: String) = dogDao.getNumOfDogId(id)
 
     suspend fun deleteDog(dog: Dog) = dogDao.deleteDog(dog)
 

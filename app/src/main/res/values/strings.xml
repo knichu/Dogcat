@@ -15,4 +15,9 @@
     <string name="dogcat_details_title" translation_description="/">Dogcat Details</string>
     <string name="today_dogcat_details_title" translation_description="/">Today Dogcat Details</string>
 
+    <string name="delete_text" translation_description="/">Delete</string>
+    <string name="cancel_text" translation_description="/">Cancel</string>
+
+
+
 </resources>

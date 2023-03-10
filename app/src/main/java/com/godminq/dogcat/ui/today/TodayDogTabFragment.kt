@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +17,10 @@ import com.godminq.dogcat.databinding.FragmentTodayDogTabBinding
 import com.godminq.dogcat.viewmodels.TodayDogTabViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -61,11 +65,8 @@ class TodayDogTabFragment : Fragment() {
 
         // save image
         binding.dogFab.setOnClickListener {
-            val savingData = adapter.getItemData(viewModel.getCurrentItemPosition(recyclerView))
-            Log.d("태그", "data = $savingData")
-            viewModel.addImageToCollection(savingData)
+            addImageToCollection()
         }
-
     }
 
     private fun searchDog(limit: Int) {
@@ -83,6 +84,34 @@ class TodayDogTabFragment : Fragment() {
         }
     }
 
-    // 현재 보이는 아이템의 위치를 얻는 메서드
+    // fab 버튼이 눌렸을 때
+    private fun addImageToCollection() {
+        lifecycleScope.launch {
+            val savingData = adapter.getItemData(viewModel.getCurrentItemPosition(binding.imageList))
+            Log.d("태그", "data1 = $savingData")
+            if (savingData != null) {
+                val numOfDogId = viewModel.checkNumOfDogId(savingData.id).take(1)
+                Log.d("태그", "data2 = $numOfDogId")
+                var flag = true
+                numOfDogId.collect{
+                    Log.d("태그", "data3 = $it")
+                    if (it == 0) {
+                        viewModel.addImageDataToCollection(savingData)
+                        Toast.makeText(context, "Image Saved", Toast.LENGTH_SHORT).show()
+                        Log.d("태그", "data5 = $it")
+                        flag = false
+                    } else {
+                        if (flag) {
+                            Toast.makeText(context, "Image Already Saved", Toast.LENGTH_SHORT).show()
+                            Log.d("태그", "data6 = $it")
+                            flag = false
+                        } else {
+                            flag = false
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

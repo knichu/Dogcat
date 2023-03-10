@@ -6,19 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.godminq.dogcat.R
-import com.godminq.dogcat.data.entity.Cat
-import com.godminq.dogcat.data.entity.Dog
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.adapters.CollectionCatAdapter
 import com.godminq.dogcat.adapters.CollectionDogAdapter
+import com.godminq.dogcat.data.repo.CatRepository
+import com.godminq.dogcat.data.repo.DogRepository
 import com.godminq.dogcat.databinding.FragmentDogAndCatCollectionBinding
 import com.godminq.dogcat.viewmodels.DogAndCatCollectionViewModel
 
@@ -31,54 +29,59 @@ import kotlinx.coroutines.launch
 class DogAndCatCollectionFragment : Fragment() {
 
     private lateinit var binding: FragmentDogAndCatCollectionBinding
-    private val collectionDogAdapter by lazy { CollectionDogAdapter() }
-    private val collectionCatAdapter by lazy { CollectionCatAdapter() }
     private val args by navArgs<DogAndCatCollectionFragmentArgs>()
     private val viewModel: DogAndCatCollectionViewModel by viewModels()
-
-//    private var _viewDataBinding: FragmentDogAndCatCollectionBinding? = null
-//    val viewDataBinding: FragmentDogAndCatCollectionBinding
-//        get() = _viewDataBinding
-//            ?: throw IllegalStateException("viewDataBinding can not be null")
+    private val collectionDogAdapter by lazy { CollectionDogAdapter(viewModel.dogRepo, binding) }
+    private val collectionCatAdapter by lazy { CollectionCatAdapter(viewModel.catRepo, binding) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val view = inflater.inflate(R.layout.fragment_dog_and_cat_collection, container, false)
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_dog_and_cat_collection,
             container,
         false
         )
-
         Log.d("태그", "collection0")
         binding.viewModel = viewModel
         Log.d("태그", "collection1")
         binding.lifecycleOwner = this
-        Log.d("태그", "collection2")
 
-        viewModel.setAnimalType(args.animalTitle)
-        Log.d("태그", "collection3")
-
-
-        // adapter 연결
-        when (args.animalTitle) {
-            "Dog" -> {
-                binding.animalCollectionRecyclerView.adapter = collectionDogAdapter
-                subscribeDogUi(collectionDogAdapter, binding)
-            }
-            "Cat" -> {
-                binding.animalCollectionRecyclerView.adapter = collectionCatAdapter
-                subscribeCatUi(collectionCatAdapter, binding)
-            }
-        }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Log.d("태그", "collection2")
+        viewModel.setAnimalType(args.animalTitle)
+        Log.d("태그", "collection3")
+        val recyclerView = binding.animalCollectionRecyclerView
+        Log.d("태1그", "test1")
+        // recyclerView 에 adapter 연결
+        connectAdapter(args.animalTitle, recyclerView)
+        Log.d("태1그", "test2")
+
+        binding.animalCollectionDeleteButton.setOnClickListener {
+            when(binding.animalCollectionDeleteButton.text) {
+                "Delete" -> {
+                    val cancelText = requireContext().resources.getString(R.string.cancel_text)
+                    binding.animalCollectionDeleteButton.text = cancelText
+                    initAdapterItemsDeleteButtonVisible(recyclerView, args.animalTitle)
+                }
+                "Cancel" -> {
+                    val deleteText = requireContext().resources.getString(R.string.delete_text)
+                    binding.animalCollectionDeleteButton.text = deleteText
+                    initAdapterItemsDeleteButtonGone(recyclerView, args.animalTitle)
+                }
+            }
+        }
+    }
+
     private fun subscribeDogUi(adapter: CollectionDogAdapter, binding: FragmentDogAndCatCollectionBinding) =
-        viewModel.dog.observe(viewLifecycleOwner) {
+        viewModel.dogRepoGetAllDog.observe(viewLifecycleOwner) {
             binding.hasLikedAnimal = it.isNotEmpty()
             adapter.submitList(it) {
                 // At this point, the content should be drawn
@@ -87,13 +90,61 @@ class DogAndCatCollectionFragment : Fragment() {
         }
 
     private fun subscribeCatUi(adapter: CollectionCatAdapter, binding: FragmentDogAndCatCollectionBinding) =
-        viewModel.cat.observe(viewLifecycleOwner) {
+        viewModel.catRepoGetAllCat.observe(viewLifecycleOwner) {
             binding.hasLikedAnimal = it.isNotEmpty()
             adapter.submitList(it) {
                 // At this point, the content should be drawn
                 activity?.reportFullyDrawn()
             }
         }
+
+    private fun connectAdapter(args: String?, recyclerView: RecyclerView) {
+        when (args) {
+            "Dog" -> {
+                recyclerView.adapter = collectionDogAdapter
+                subscribeDogUi(collectionDogAdapter, binding)
+            }
+            "Cat" -> {
+                recyclerView.adapter = collectionDogAdapter
+                subscribeCatUi(collectionCatAdapter, binding)
+            }
+        }
+    }
+
+    private fun initAdapterItemsDeleteButtonVisible(recyclerView: RecyclerView, args: String?) {
+        when (args) {
+            "Dog" -> {
+                for (i in 0 until recyclerView.childCount) {
+                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionDogAdapter.ViewHolder
+                    viewHolder?.deleteImageButton?.visibility = View.VISIBLE
+                }
+            }
+            "Cat" -> {
+                for (i in 0 until recyclerView.childCount) {
+                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionCatAdapter.ViewHolder
+                    viewHolder?.deleteImageButton?.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun initAdapterItemsDeleteButtonGone(recyclerView: RecyclerView, args: String?) {
+        when (args) {
+            "Dog" -> {
+                for (i in 0 until recyclerView.childCount) {
+                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionDogAdapter.ViewHolder
+                    viewHolder?.deleteImageButton?.visibility = View.GONE
+                }
+            }
+            "Cat" -> {
+                for (i in 0 until recyclerView.childCount) {
+                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionCatAdapter.ViewHolder
+                    viewHolder?.deleteImageButton?.visibility = View.GONE
+                }
+            }
+        }
+    }
+
 }
 
 

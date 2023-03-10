@@ -1,18 +1,28 @@
 package com.godminq.dogcat.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.data.entity.Dog
+import com.godminq.dogcat.data.repo.DogRepository
+import com.godminq.dogcat.databinding.FragmentDogAndCatCollectionBinding
 import com.godminq.dogcat.databinding.ListItemDogCollectionBinding
 import com.godminq.dogcat.viewmodels.CollectionDogAdapterViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CollectionDogAdapter :
-    ListAdapter<Dog, CollectionDogAdapter.ViewHolder>(
+class CollectionDogAdapter @Inject constructor(
+    private val dogRepository: DogRepository,
+    private val fragmentBinding: FragmentDogAndCatCollectionBinding
+    ) : ListAdapter<Dog, CollectionDogAdapter.ViewHolder>(
         LikedDogDiffCallback()
     ) {
 
@@ -27,16 +37,30 @@ class CollectionDogAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val photo = getItem(position)
         if (photo != null) {
-            holder.bind(photo)
+            viewHolder.bind(photo)
+        }
+
+        viewHolder.deleteImageButton.setOnClickListener {
+            deleteItem(photo, position)
+        }
+
+        when(fragmentBinding.animalCollectionDeleteButton.text) {
+            "Delete" -> {
+                viewHolder.deleteImageButton.visibility = View.GONE
+            }
+            "Cancel" -> {
+                viewHolder.deleteImageButton.visibility = View.VISIBLE
+            }
         }
     }
 
     class ViewHolder(
-        private val binding: ListItemDogCollectionBinding
+        private val binding: ListItemDogCollectionBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
+        val deleteImageButton: ImageButton = binding.deleteDogImageButton
         init {
 //            // setClickListener 는 여기에서 설정
 //            // 클릭해서 넘어갈때 이부분 활성화
@@ -45,6 +69,7 @@ class CollectionDogAdapter :
 //                    navigateToDetail(animalName, view)
 //                }
 //            }
+
         }
 
 //        // 클릭해서 넘어갈때 이부분 활성화
@@ -60,7 +85,14 @@ class CollectionDogAdapter :
                 executePendingBindings()
             }
         }
+    }
 
+    private fun deleteItem(dog: Dog, position: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            dogRepository.deleteDog(dog)
+//            notifyItemRemoved(position)
+            notifyDataSetChanged()
+        }
     }
 }
 
