@@ -1,7 +1,6 @@
 package com.godminq.dogcat.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.LoadState
@@ -10,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.databinding.LayoutLoadingStateBinding
 
-class TodayDogTabLoadStateAdapter (
+class TodayTabLoadStateAdapter (
     private val retry: () -> Unit
-) : LoadStateAdapter<TodayDogTabLoadStateAdapter.ViewHolder>() {
+) : LoadStateAdapter<TodayTabLoadStateAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
         holder.bind(loadState)

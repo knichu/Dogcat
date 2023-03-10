@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.R
 import com.godminq.dogcat.adapters.TodayCatTabPagingDataAdapter.CatTabViewHolder
 import com.godminq.dogcat.data.entity.TheCatApiSearchResponse
-import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
 import com.godminq.dogcat.databinding.ListItemTodayCatBinding
-import com.godminq.dogcat.databinding.ListItemTodayDogBinding
 
 class TodayCatTabPagingDataAdapter:
     PagingDataAdapter<TheCatApiSearchResponse, CatTabViewHolder>(

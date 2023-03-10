@@ -33,7 +33,6 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
         dogDao.insertDogData(dogData)
     }
 
-
     companion object {
 
         // For Singleton instantiation

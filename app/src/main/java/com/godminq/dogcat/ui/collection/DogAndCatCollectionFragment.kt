@@ -59,10 +59,10 @@ class DogAndCatCollectionFragment : Fragment() {
         viewModel.setAnimalType(args.animalTitle)
         Log.d("태그", "collection3")
         val recyclerView = binding.animalCollectionRecyclerView
-        Log.d("태1그", "test1")
+        Log.d("태그", "test111")
         // recyclerView 에 adapter 연결
         connectAdapter(args.animalTitle, recyclerView)
-        Log.d("태1그", "test2")
+        Log.d("태그", "test222")
 
         binding.animalCollectionDeleteButton.setOnClickListener {
             when(binding.animalCollectionDeleteButton.text) {
@@ -105,7 +105,7 @@ class DogAndCatCollectionFragment : Fragment() {
                 subscribeDogUi(collectionDogAdapter, binding)
             }
             "Cat" -> {
-                recyclerView.adapter = collectionDogAdapter
+                recyclerView.adapter = collectionCatAdapter
                 subscribeCatUi(collectionCatAdapter, binding)
             }
         }

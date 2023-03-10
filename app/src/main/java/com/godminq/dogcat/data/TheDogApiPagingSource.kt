@@ -28,7 +28,6 @@ class TheDogApiPagingSource(
                 nextKey = if (page == 100) null else page + 1
             )
 
-
         } catch (exception: Exception) {
 //            val error123 =
 //            Log.d("태그", "$error123, catch testing")

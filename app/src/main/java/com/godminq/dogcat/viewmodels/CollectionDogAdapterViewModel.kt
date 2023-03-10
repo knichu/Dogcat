@@ -13,9 +13,8 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CollectionDogAdapterViewModel(
-    dog: Dog,
-) {
+class CollectionDogAdapterViewModel(dog: Dog) {
+
     private val dog = dog
 
     private val _animal: MutableLiveData<Animal> = MutableLiveData()

@@ -2,9 +2,7 @@ package com.godminq.dogcat.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.databinding.DataBindingUtil
-import androidx.paging.DifferCallback
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

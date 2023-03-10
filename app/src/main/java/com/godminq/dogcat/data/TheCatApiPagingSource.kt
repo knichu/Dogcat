@@ -16,12 +16,13 @@ class TheCatApiPagingSource(
         val page = params.key ?: THE_CAT_API_STARTING_PAGE_INDEX
         val mimeType = "jpg"
         return try {
-            val images = service.searchImages(limit, mimeType)
+            val images = service.searchImages(limit, mimeType, page)
             LoadResult.Page(
                 data = images,
                 prevKey = if (page == THE_CAT_API_STARTING_PAGE_INDEX) null else page - 1,
-                nextKey = if (page == 10) null else page + 1
+                nextKey = if (page == 100) null else page + 1
             )
+
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
@@ -33,7 +34,8 @@ class TheCatApiPagingSource(
             // multiple pages, the initial load will still load items centered around
             // anchorPosition. This also prevents needing to immediately launch prepend due to
             // prefetchDistance.
-            state.closestPageToPosition(anchorPosition)?.prevKey
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 }

@@ -11,8 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.godminq.dogcat.R
-import com.godminq.dogcat.adapters.TodayDogTabLoadStateAdapter
 import com.godminq.dogcat.adapters.TodayDogTabPagingDataAdapter
+import com.godminq.dogcat.adapters.TodayTabLoadStateAdapter
 import com.godminq.dogcat.databinding.FragmentTodayDogTabBinding
 import com.godminq.dogcat.viewmodels.TodayDogTabViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,11 +48,11 @@ class TodayDogTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = binding.imageList
+        val recyclerView = binding.dogImageList
 
         // init recyclerView
         recyclerView.adapter = adapter.withLoadStateFooter(
-            footer = TodayDogTabLoadStateAdapter { adapter.retry() }
+            footer = TodayTabLoadStateAdapter { adapter.retry() }
         )
 
         // activate one swipe, one move
@@ -87,7 +87,7 @@ class TodayDogTabFragment : Fragment() {
     // fab 버튼이 눌렸을 때
     private fun addImageToCollection() {
         lifecycleScope.launch {
-            val savingData = adapter.getItemData(viewModel.getCurrentItemPosition(binding.imageList))
+            val savingData = adapter.getItemData(viewModel.getCurrentItemPosition(binding.dogImageList))
             Log.d("태그", "data1 = $savingData")
             if (savingData != null) {
                 val numOfDogId = viewModel.checkNumOfDogId(savingData.id).take(1)
