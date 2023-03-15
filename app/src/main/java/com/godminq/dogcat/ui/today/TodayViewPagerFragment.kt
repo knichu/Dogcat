@@ -59,8 +59,8 @@ class TodayViewPagerFragment : Fragment() {
     // 각 selector 부분 새로 만들어야함
     private fun getTabIcon(position: Int): Int {
         return when (position) {
-            TODAY_DOG_TAB_PAGE_INDEX -> R.drawable.today_dogcat_tab_selector
-            TODAY_CAT_TAB_PAGE_INDEX -> R.drawable.dogcat_collection_tab_selector
+            TODAY_DOG_TAB_PAGE_INDEX -> R.drawable.dog_footprint
+            TODAY_CAT_TAB_PAGE_INDEX -> R.drawable.cat_footprint
             else -> throw IndexOutOfBoundsException()
         }
     }

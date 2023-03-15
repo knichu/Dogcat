@@ -8,6 +8,7 @@
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ECDBB1"
         android:fitsSystemWindows="true">
 
         <TextView
@@ -15,14 +16,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/alfa_slab_one"
             android:text="@string/app_name"
-            android:textColor="#000000"
+            android:textColor="#0A4655"
             android:textSize="34sp"
             app:layout_constraintBottom_toTopOf="@+id/nav_host_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DogCat" />
 
         <!-- Override tabIconTint attribute of style with selector -->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="66dp"
+            android:layout_height="43dp"
+            app:layout_constraintBottom_toBottomOf="@+id/app_title"
+            app:layout_constraintStart_toEndOf="@+id/app_title"
+            app:layout_constraintTop_toTopOf="@+id/app_title"
+            app:srcCompat="@drawable/dogcat_main_symbol" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_container"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -32,6 +45,7 @@
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_dogcat"
@@ -42,14 +56,15 @@
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:labelVisibilityMode="labeled"
+            android:background="#007896"
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemTextColor="@drawable/menu_selector_color"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nav_host_container"
-            app:menu="@menu/bottom_menu"/>
+            app:menu="@menu/bottom_menu" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

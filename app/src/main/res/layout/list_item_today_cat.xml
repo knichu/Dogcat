@@ -19,7 +19,8 @@
         android:layout_marginTop="26dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="26dp"
-        app:cardElevation="5dp"
+        android:backgroundTint="#ECDBB1"
+        app:cardElevation="0dp"
         app:cardPreventCornerOverlap="false">
         <!--        android:onClick="@{clickListener}"-->
 

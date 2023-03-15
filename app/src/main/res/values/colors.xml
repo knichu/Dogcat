@@ -13,6 +13,8 @@
     <color name="dogcat_green_200">#D5FF9C</color>
     <color name="dogcat_green_800">#272E1E</color>
 
+    <color name="dogcat_beige_200">#ECDBB1</color>
+
     <!-- sunflower color, 나중에 삭제 -->
     <color name="sunflower_black">#de000000</color>
     <color name="sunflower_gray_50">#fafafa</color>
