@@ -3,32 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_dogcat_collection"
-    app:startDestination="@id/dogcatCollectionFragment">
+    app:startDestination="@id/selectDogcatCollectionFragment">
 
     <fragment
-        android:id="@+id/dogcatCollectionFragment"
+        android:id="@+id/selectDogcatCollectionFragment"
         android:name="com.godminq.dogcat.ui.collection.SelectDogcatCollectionFragment"
         tools:layout="@layout/fragment_select_dogcat_collection"
         android:label="dogcatCollectionFragment">
         <action
-            android:id="@+id/action_dogcatCollectionFragment_to_dogAndCatCollectionFragment"
+            android:id="@+id/action_selectDogcatCollectionFragment_to_dogAndCatCollectionFragment"
             app:destination="@id/dogAndCatCollectionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in_right"
+            app:exitAnim="@anim/fade_out_left"
+            app:popEnterAnim="@anim/fade_in_left"
+            app:popExitAnim="@anim/fade_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/dogAndCatCollectionFragment"
         android:name="com.godminq.dogcat.ui.collection.DogAndCatCollectionFragment"
         tools:layout="@layout/fragment_dog_and_cat_collection"
-        android:label="DogAndCatCollectionFragment" >
+        android:label="DogAndCatCollectionFragment">
         <argument
             android:name="animalTitle"
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_dogAndCatCollectionFragment_to_selectDogcatCollectionFragment"
+            app:destination="@id/selectDogcatCollectionFragment"
+            app:popUpTo="@id/selectDogcatCollectionFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/fade_in_right"
+            app:exitAnim="@anim/fade_out_left"
+            app:popEnterAnim="@anim/fade_in_left"
+            app:popExitAnim="@anim/fade_out_right" />
     </fragment>
 
 </navigation>

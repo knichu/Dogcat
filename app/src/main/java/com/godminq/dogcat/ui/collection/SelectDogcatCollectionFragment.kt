@@ -20,18 +20,17 @@ class SelectDogcatCollectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         val view = inflater.inflate(R.layout.fragment_select_dogcat_collection, container, false)
 
         view.findViewById<View>(R.id.constraintLayoutDogcollection).setOnClickListener {
             val action1 = SelectDogcatCollectionFragmentDirections.
-            actionDogcatCollectionFragmentToDogAndCatCollectionFragment("Dog")
+            actionSelectDogcatCollectionFragmentToDogAndCatCollectionFragment("Dog")
             findNavController().navigate(action1)
         }
 
         view.findViewById<View>(R.id.constraintLayoutCatcollection).setOnClickListener {
             val action2 = SelectDogcatCollectionFragmentDirections.
-            actionDogcatCollectionFragmentToDogAndCatCollectionFragment("Cat")
+            actionSelectDogcatCollectionFragmentToDogAndCatCollectionFragment("Cat")
             findNavController().navigate(action2)
         }
         return view

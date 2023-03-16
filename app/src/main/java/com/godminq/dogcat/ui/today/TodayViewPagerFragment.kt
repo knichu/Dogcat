@@ -56,7 +56,6 @@ class TodayViewPagerFragment : Fragment() {
 
     }
 
-    // 각 selector 부분 새로 만들어야함
     private fun getTabIcon(position: Int): Int {
         return when (position) {
             TODAY_DOG_TAB_PAGE_INDEX -> R.drawable.dog_footprint

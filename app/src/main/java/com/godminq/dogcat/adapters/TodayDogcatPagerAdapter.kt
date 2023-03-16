@@ -24,5 +24,4 @@ class TodayDogcatPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragme
         return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
 
-
 }

@@ -9,12 +9,6 @@
         android:id="@+id/today_view_pager_fragment"
         android:name="com.godminq.dogcat.ui.today.TodayViewPagerFragment"
         tools:layout="@layout/fragment_today_view_pager">
-
-        <argument
-            android:name="todayDogcat1"
-
-            app:argType="string" />
     </fragment>
-
 
 </navigation>

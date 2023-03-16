@@ -9,5 +9,4 @@
     <include app:graph="@navigation/nav_dogcat_collection" />
     <include app:graph="@navigation/nav_settings" />
 
-
 </navigation>

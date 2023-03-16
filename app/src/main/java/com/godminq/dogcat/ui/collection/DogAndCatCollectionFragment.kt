@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.godminq.dogcat.R
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.godminq.dogcat.adapters.CollectionCatAdapter
@@ -64,6 +66,9 @@ class DogAndCatCollectionFragment : Fragment() {
         connectAdapter(args.animalTitle, recyclerView)
         Log.d("태그", "test222")
 
+        // init image symbol
+        initImageSymbol(args.animalTitle)
+
         binding.animalCollectionDeleteButton.setOnClickListener {
             when(binding.animalCollectionDeleteButton.text) {
                 "Delete" -> {
@@ -78,7 +83,24 @@ class DogAndCatCollectionFragment : Fragment() {
                 }
             }
         }
+
+        binding.backButtonAtCollection.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
+
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        // Go back to the first Fragment of the Collection tab
+//        val navController = findNavController()
+//        val stackEntry = navController.currentBackStackEntry
+//        if (stackEntry?.destination?.id == R.id.selectDogcatCollectionFragment) {
+//            val fragment = stackEntry.savedStateHandle.get<DogAndCatCollectionFragment>("dogAndCatCollectionFragment")
+//            if (fragment != null && !fragment.isDetached) {
+//                childFragmentManager.beginTransaction().detach(fragment).commit()
+//            }
+//        }
+//    }
 
     private fun subscribeDogUi(adapter: CollectionDogAdapter, binding: FragmentDogAndCatCollectionBinding) =
         viewModel.dogRepoGetAllDog.observe(viewLifecycleOwner) {
@@ -114,13 +136,13 @@ class DogAndCatCollectionFragment : Fragment() {
     private fun initAdapterItemsDeleteButtonVisible(recyclerView: RecyclerView, args: String?) {
         when (args) {
             "Dog" -> {
-                for (i in 0 until recyclerView.childCount) {
+                for (i in 0 until (recyclerView.adapter?.itemCount!!)) {
                     val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionDogAdapter.ViewHolder
                     viewHolder?.deleteImageButton?.visibility = View.VISIBLE
                 }
             }
             "Cat" -> {
-                for (i in 0 until recyclerView.childCount) {
+                for (i in 0 until recyclerView.adapter?.itemCount!!) {
                     val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionCatAdapter.ViewHolder
                     viewHolder?.deleteImageButton?.visibility = View.VISIBLE
                 }
@@ -131,16 +153,27 @@ class DogAndCatCollectionFragment : Fragment() {
     private fun initAdapterItemsDeleteButtonGone(recyclerView: RecyclerView, args: String?) {
         when (args) {
             "Dog" -> {
-                for (i in 0 until recyclerView.childCount) {
+                for (i in 0 until recyclerView.adapter?.itemCount!!) {
                     val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionDogAdapter.ViewHolder
                     viewHolder?.deleteImageButton?.visibility = View.GONE
                 }
             }
             "Cat" -> {
-                for (i in 0 until recyclerView.childCount) {
+                for (i in 0 until recyclerView.adapter?.itemCount!!) {
                     val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CollectionCatAdapter.ViewHolder
                     viewHolder?.deleteImageButton?.visibility = View.GONE
                 }
+            }
+        }
+    }
+
+    private fun initImageSymbol(args: String?) {
+        when(args) {
+            "Dog" -> {
+                binding.collectionTitleImageView.setImageResource(R.drawable.dogcat_dog_symbol)
+            }
+            "Cat" -> {
+                binding.collectionTitleImageView.setImageResource(R.drawable.dogcat_cat_symbol)
             }
         }
     }
