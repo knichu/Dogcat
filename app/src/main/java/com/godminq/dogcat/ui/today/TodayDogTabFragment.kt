@@ -60,7 +60,7 @@ class TodayDogTabFragment : Fragment() {
 
         // api loading
         if (adapter.itemCount < 10) {
-            searchDog(3)
+            searchDog(10)
         }
 
         // save image

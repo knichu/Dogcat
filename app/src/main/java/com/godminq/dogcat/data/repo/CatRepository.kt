@@ -2,10 +2,7 @@ package com.godminq.dogcat.data.repo
 
 import com.godminq.dogcat.data.dao.CatDao
 import com.godminq.dogcat.data.entity.Cat
-import com.godminq.dogcat.data.entity.Dog
 import com.godminq.dogcat.data.entity.TheCatApiSearchResponse
-import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
-import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 

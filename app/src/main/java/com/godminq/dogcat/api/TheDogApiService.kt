@@ -1,6 +1,7 @@
 package com.godminq.dogcat.api
 
 import android.util.Log
+import com.godminq.dogcat.BuildConfig
 import com.godminq.dogcat.data.entity.TheDogApiSearchResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,8 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-val THE_DOG_API_ACCESS_KEY = "live_gFsvDwUEj0oILkCZFrMxJ4jzRd6XNkhns21NKNBsp31HoJCi4K3LuLpHhGQQhvTx"
-
 interface TheDogApiService {
 
     @GET("v1/images/search")
@@ -18,7 +17,7 @@ interface TheDogApiService {
         @Query("limit") limit: Int,
         @Query("mime_types") mimeTypes: String,
         @Query("page") page: Int,
-//        @Query("api_key") apiKey: String = THE_DOG_API_ACCESS_KEY
+        @Query("api_key") apiKey: String = BuildConfig.THE_DOG_API_ACCESS_KEY
     ): List<TheDogApiSearchResponse>
 
     companion object {

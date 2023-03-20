@@ -61,7 +61,7 @@ class TodayCatTabFragment : Fragment() {
 
         // api loading
         if (adapter.itemCount < 10) {
-            searchCat(3)
+            searchCat(10)
         }
 
         // save image
