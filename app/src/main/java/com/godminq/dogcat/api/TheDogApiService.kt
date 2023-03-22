@@ -29,6 +29,21 @@ interface TheDogApiService {
             Log.d("태그", "TheDogApiService create2")
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)
+//                .addInterceptor { chain ->
+//                    val originalRequest = chain.request()
+//                    val url = originalRequest.url.newBuilder()
+//                        .addQueryParameter("limit", originalRequest.url.queryParameter("limit"))
+//                        .addQueryParameter("mime_types", originalRequest.url.queryParameter("mime_types"))
+//                        .addQueryParameter("page", originalRequest.url.queryParameter("page"))
+//                        .addQueryParameter("api_key", originalRequest.url.queryParameter("api_key"))
+//                        .build()
+//                    val requestBuilder = originalRequest.newBuilder().url(url)
+//                    Log.d("태그", "searchImages()_dog: limit=${originalRequest.url.queryParameter("limit")}," +
+//                            " mimeTypes=${originalRequest.url.queryParameter("mime_types")}," +
+//                            " page=${originalRequest.url.queryParameter("page")}," +
+//                            " apiKey=${originalRequest.url.queryParameter("api_key")}")
+//                    chain.proceed(requestBuilder.build())
+//                }
                 .build()
             Log.d("태그", "TheDogApiService create3")
             return Retrofit.Builder()

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("org.jetbrains.kotlin.android")
     id("com.android.application")
@@ -16,13 +18,26 @@ android {
         applicationId = "com.godminq.dogcat"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner  = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "THE_DOG_API_ACCESS_KEY", "\"" + getTheDogApiAccess() + "\"")
-        buildConfigField("String", "THE_CAT_API_ACCESS_KEY", "\"" + getTheCatApiAccess() + "\"")
+//        buildConfigField("String", "THE_DOG_API_ACCESS_KEY", "\"" + getTheDogApiAccess() + "\"")
+//        buildConfigField("String", "THE_CAT_API_ACCESS_KEY", "\"" + getTheCatApiAccess() + "\"")
+
+//        buildConfigField("String", "THE_DOG_API_ACCESS_KEY", "\"${the_dog_api_access_key}\"")
+//        buildConfigField("String", "THE_CAT_API_ACCESS_KEY", "\"${the_cat_api_access_key}\"")
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "THE_CAT_API_ACCESS_KEY",
+            properties.getProperty("the_cat_api_access_key")
+        )
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "THE_DOG_API_ACCESS_KEY",
+            properties.getProperty("the_dog_api_access_key")
+        )
 
         // @InstallIn 무시 코드
         javaCompileOptions {
@@ -111,11 +126,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
 
-
-
-fun getTheDogApiAccess(): String? {
-    return project.findProperty("the_dog_api_access_key") as? String
-}
-fun getTheCatApiAccess(): String? {
-    return project.findProperty("the_cat_api_access_key") as? String
-}
+//fun getTheDogApiAccess(): String? {
+//    return project.findProperty("the_dog_api_access_key") as? String
+//}
+//fun getTheCatApiAccess(): String? {
+//    return project.findProperty("the_cat_api_access_key") as? String
+//}
