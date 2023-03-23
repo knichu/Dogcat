@@ -18,8 +18,8 @@ android {
         applicationId = "com.godminq.dogcat"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 5
-        versionName = "1.4"
+        versionCode = 6
+        versionName = "1.5"
 
         testInstrumentationRunner  = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -47,6 +47,7 @@ android {
     }
 
     buildTypes {
+        // 난독화 적용 코드
 //        release {
 //            isMinifyEnabled = true
 //            isShrinkResources = true
