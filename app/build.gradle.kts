@@ -18,8 +18,8 @@ android {
         applicationId = "com.godminq.dogcat"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 5
+        versionName = "1.4"
 
         testInstrumentationRunner  = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -34,7 +34,6 @@ android {
         buildConfigField("String", "THE_CAT_API_ACCESS_KEY",
             properties.getProperty("the_cat_api_access_key")
         )
-        properties.load(project.rootProject.file("local.properties").inputStream())
         buildConfigField("String", "THE_DOG_API_ACCESS_KEY",
             properties.getProperty("the_dog_api_access_key")
         )
@@ -48,10 +47,11 @@ android {
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+//        release {
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+//            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
