@@ -22,3 +22,7 @@
 
 # added
 #-printconfiguration
+#-printusage /Users/iminkyu/DogcatUsage/usage.txt
+-keepclassmembers class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}

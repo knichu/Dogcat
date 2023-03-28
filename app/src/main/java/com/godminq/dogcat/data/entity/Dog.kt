@@ -6,19 +6,19 @@ import java.util.Calendar
 @Entity(tableName = "collected_dog")
 data class Dog(
     @ColumnInfo
-    var id: String? = "",
+    val id: String? = "",
 
     @ColumnInfo
-    var url: String? = "",
+    val url: String? = "",
 
     @ColumnInfo
-    var width: Long? = 0,
+    val width: Long? = 0,
 
     @ColumnInfo
-    var height: Long? = 0,
+    val height: Long? = 0,
 
     @ColumnInfo(name = "date")
-    var dateTime: Calendar? = Calendar.getInstance()
+    val dateTime: Calendar? = Calendar.getInstance()
 
 ) : Animal() {
 
