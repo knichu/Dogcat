@@ -9,7 +9,7 @@ DogCat을 이용해 귀여운 강아지와 고양이 사진을 계속 볼수 있
 저장한 사진들은 각 Dog, Cat collection앨범에서 저장한 날짜별로 확인할 수 있습니다.
 
 <p align="left">
-<a href="https://play.google.com/store/apps/details?id=com.anseolab.lotty">
+<a href="https://play.google.com/store/apps/details?id=com.godminq.dogcat">
     <img alt="Get it on Google Play"
         height="80"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
